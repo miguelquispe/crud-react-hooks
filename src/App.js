@@ -33,6 +33,7 @@ const App = () => {
   // STATE
   const [services, setServices] = useState(servicesData);
   const [currentService, setCurrentService] = useState(initialFormState);
+  const [editing, setEditing] = useState(false);
 
   // CRUD ACTIONS
   const addService = service => {
@@ -41,6 +42,7 @@ const App = () => {
   };
 
   const editService = service => {
+    setEditing(true);
     setCurrentService({
       id: service.id,
       name: service.name,
@@ -50,10 +52,10 @@ const App = () => {
   };
 
   const updateService = (id, updateService) => {
+    setEditing(false);
     setServices(
       services.map(service => (service.id === id ? updateService : service))
     );
-    setCurrentService(initialFormState);
   };
 
   const deleteService = id => {
@@ -75,13 +77,16 @@ const App = () => {
             />
           </div>
           <div className="column col-4">
-            {/* <EditServiceForm
-              categories={categories}
-              currentService={currentService}
-              updateService={updateService}
-            /> */}
-
-            <AddServiceForm categories={categories} addService={addService} />
+            {editing ? (
+              <EditServiceForm
+                categories={categories}
+                currentService={currentService}
+                updateService={updateService}
+                setEditing={setEditing}
+              />
+            ) : (
+              <AddServiceForm categories={categories} addService={addService} />
+            )}
           </div>
         </div>
       </div>

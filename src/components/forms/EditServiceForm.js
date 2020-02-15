@@ -19,10 +19,14 @@ const EditServiceForm = props => {
     props.updateService(service.id, service);
   };
 
+  const handleCancelClick = () => {
+    props.setEditing(false);
+  };
+
   return (
     <div className="card">
       <div className="card-header">
-        <div className="card-title h5">Servicio</div>
+        <div className="card-title h5">Editar Servicio</div>
       </div>
       <div className="card-body">
         <form onSubmit={handleOnSubmit}>

@@ -21,6 +21,7 @@ const AddServiceForm = props => {
 
     if (!service.name || !service.description || !service.category) return;
     props.addService(service);
+    setService(initialState);
   };
 
   return (
@@ -69,8 +70,7 @@ const AddServiceForm = props => {
             </select>
           </div>
           <div className="form-group">
-            <button className="btn btn-primary">Grabar</button>
-            <button className="btn">Cancelar</button>
+            <button className="btn btn-primary">Agregar</button>
           </div>
         </form>
       </div>
