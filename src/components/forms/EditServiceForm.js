@@ -1,6 +1,6 @@
 import React from "react";
 
-const EditForm = () => {
+const EditServiceForm = props => {
   const handleInputOnChange = () => {};
 
   return (
@@ -34,6 +34,12 @@ const EditForm = () => {
             <label className="form-label">Categoría</label>
             <select className="form-select" onChange={handleInputOnChange}>
               <option>Seleccione</option>
+              {props.categories.length > 0 &&
+                props.categories.map(category => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="form-group">
@@ -46,4 +52,4 @@ const EditForm = () => {
   );
 };
 
-export default EditForm;
+export default EditServiceForm;

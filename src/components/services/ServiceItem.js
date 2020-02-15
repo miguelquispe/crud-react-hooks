@@ -1,7 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ServiceItem = props => {
-  const { name, description, category } = props.service;
+  const { id, name, description, category } = props.service;
+
+  const handleClickEdit = id => {
+    // alert(id);
+  };
+
+  const handleClickDelete = id => {
+    props.deleteService(id);
+  };
+
   return (
     <div className="column col-4">
       <div className="card">
@@ -15,16 +25,27 @@ const ServiceItem = props => {
           </p>
         </div>
         <div className="card-footer">
-          <a href="#1" className="btn btn-link">
+          <button className="btn btn-link" onClick={() => handleClickEdit(id)}>
             Editar
-          </a>
-          <a href="#2" className="btn btn-link">
+          </button>
+          <button
+            className="btn btn-link"
+            onClick={() => handleClickDelete(id)}
+          >
             Eliminar
-          </a>
+          </button>
         </div>
       </div>
     </div>
   );
+};
+
+ServiceItem.propTypes = {
+  service: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default ServiceItem;
