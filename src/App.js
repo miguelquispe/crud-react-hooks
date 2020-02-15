@@ -35,6 +35,11 @@ const App = () => {
   const [currentService, setCurrentService] = useState(initialFormState);
 
   // CRUD ACTIONS
+  const addService = service => {
+    service.id = services.length + 1;
+    setServices([...services, service]);
+  };
+
   const editService = service => {
     setCurrentService({
       id: service.id,
@@ -70,11 +75,13 @@ const App = () => {
             />
           </div>
           <div className="column col-4">
-            <EditServiceForm
+            {/* <EditServiceForm
               categories={categories}
               currentService={currentService}
               updateService={updateService}
-            />
+            /> */}
+
+            <AddServiceForm categories={categories} addService={addService} />
           </div>
         </div>
       </div>
