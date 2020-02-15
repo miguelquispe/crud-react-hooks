@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const EditServiceForm = props => {
-  const handleInputOnChange = () => {};
+  const [service, setService] = useState(props.currentService);
+
+  useEffect(() => {
+    setService(props.currentService);
+  }, [props]);
+
+  const handleInputOnChange = event => {
+    const { name, value } = event.target;
+
+    setService({ ...service, [name]: value });
+  };
+
+  const handleOnSubmit = event => {
+    event.preventDefault();
+
+    props.updateService(service.id, service);
+  };
 
   return (
     <div className="card">
@@ -9,14 +25,14 @@ const EditServiceForm = props => {
         <div className="card-title h5">Servicio</div>
       </div>
       <div className="card-body">
-        <form>
+        <form onSubmit={handleOnSubmit}>
           <div className="form-group">
             <label className="form-label">Nombre</label>
             <input
               className="form-input"
               name="name"
               type="text"
-              value=""
+              value={service.name}
               onChange={handleInputOnChange}
             />
           </div>
@@ -26,13 +42,19 @@ const EditServiceForm = props => {
               className="form-input"
               name="description"
               type="text"
-              value=""
+              value={service.description}
               onChange={handleInputOnChange}
             />
           </div>
           <div className="form-group">
             <label className="form-label">Categoría</label>
-            <select className="form-select" onChange={handleInputOnChange}>
+            <select
+              name="category"
+              className="form-select"
+              value={service.category}
+              onChange={handleInputOnChange}
+              onBlur={handleInputOnChange}
+            >
               <option>Seleccione</option>
               {props.categories.length > 0 &&
                 props.categories.map(category => (

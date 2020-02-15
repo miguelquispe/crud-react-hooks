@@ -5,7 +5,7 @@ import ServicesList from "./components/services/ServicesList";
 import AddServiceForm from "./components/forms/AddServiceForm";
 
 const App = () => {
-  // DATA
+  // STATE
   const categories = ["Autos", "Hogar", "Salud"];
 
   const servicesData = [
@@ -23,12 +23,32 @@ const App = () => {
     }
   ];
 
-  // HOOKS
+  const initialFormState = {
+    id: null,
+    name: "",
+    description: "",
+    category: ""
+  };
+
+  // STATE
   const [services, setServices] = useState(servicesData);
+  const [currentService, setCurrentService] = useState(initialFormState);
 
   // CRUD ACTIONS
-  const editService = id => {
-    console.log("edit service");
+  const editService = service => {
+    setCurrentService({
+      id: service.id,
+      name: service.name,
+      description: service.description,
+      category: service.category
+    });
+  };
+
+  const updateService = (id, updateService) => {
+    setServices(
+      services.map(service => (service.id === id ? updateService : service))
+    );
+    setCurrentService(initialFormState);
   };
 
   const deleteService = id => {
@@ -43,10 +63,18 @@ const App = () => {
         <NavBar />
         <div className="columns">
           <div className="column col-8">
-            <ServicesList services={services} deleteService={deleteService} />
+            <ServicesList
+              services={services}
+              editService={editService}
+              deleteService={deleteService}
+            />
           </div>
           <div className="column col-4">
-            <EditServiceForm categories={categories} />
+            <EditServiceForm
+              categories={categories}
+              currentService={currentService}
+              updateService={updateService}
+            />
           </div>
         </div>
       </div>

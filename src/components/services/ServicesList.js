@@ -2,6 +2,9 @@ import React from "react";
 import ServiceItem from "./ServiceItem";
 
 const ServicesList = props => {
+  const editService = service => {
+    props.editService(service);
+  };
   const deleteService = id => {
     props.deleteService(id);
   };
@@ -13,6 +16,7 @@ const ServicesList = props => {
           <ServiceItem
             key={service.id}
             service={service}
+            editService={editService}
             deleteService={deleteService}
           />
         ))

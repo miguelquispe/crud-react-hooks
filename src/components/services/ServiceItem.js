@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ServiceItem = props => {
-  const { id, name, description, category } = props.service;
+  const service = props.service;
+  const { id, name, description, category } = service;
 
-  const handleClickEdit = id => {
-    // alert(id);
+  const handleClickEdit = service => {
+    // console.log(service);
+    props.editService(service);
   };
 
   const handleClickDelete = id => {
@@ -25,7 +27,10 @@ const ServiceItem = props => {
           </p>
         </div>
         <div className="card-footer">
-          <button className="btn btn-link" onClick={() => handleClickEdit(id)}>
+          <button
+            className="btn btn-link"
+            onClick={() => handleClickEdit(service)}
+          >
             Editar
           </button>
           <button
