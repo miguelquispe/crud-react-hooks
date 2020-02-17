@@ -1,6 +1,8 @@
 # SERVICES
 
-CRUD App with React
+CRUD App with React using Hooks
+
+[View Demo](https://mystifying-swartz-3e2609.netlify.com/)
 
 ---
 
