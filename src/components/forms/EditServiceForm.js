@@ -70,7 +70,9 @@ const EditServiceForm = props => {
           </div>
           <div className="form-group">
             <button className="btn btn-primary">Grabar</button>
-            <button className="btn">Cancelar</button>
+            <button className="btn" onClick={handleCancelClick}>
+              Cancelar
+            </button>
           </div>
         </form>
       </div>

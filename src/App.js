@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EditServiceForm from "./components/forms/EditServiceForm";
 import NavBar from "./components/NavBar";
 import ServicesList from "./components/services/ServicesList";
@@ -8,7 +8,9 @@ const App = () => {
   // STATE
   const categories = ["Autos", "Hogar", "Salud"];
 
-  const servicesData = [
+  // const initialServices = [];
+
+  const initialServices = [
     {
       id: 1,
       name: "Electricidad",
@@ -31,9 +33,10 @@ const App = () => {
   };
 
   // STATE
-  const [services, setServices] = useState(servicesData);
+  const [services, setServices] = useState(initialServices);
   const [currentService, setCurrentService] = useState(initialFormState);
   const [editing, setEditing] = useState(false);
+  const [filter, setFilter] = useState("all");
 
   // CRUD ACTIONS
   const addService = service => {
@@ -62,18 +65,29 @@ const App = () => {
     setServices(services.filter(service => service.id !== id));
   };
 
+  // Filter
+  const filtered = category => {
+    setFilter(category.toLocaleLowerCase());
+  };
+
+  // Effect: services change
+  useEffect(() => {
+    setFilter("all");
+  }, [services]);
+
   // RENDER
   return (
     <div className="App">
       <div className="container">
         <h3 className="text-center">Servicios</h3>
-        <NavBar />
+        <NavBar categories={categories} filtered={filtered} />
         <div className="columns">
           <div className="column col-8">
             <ServicesList
               services={services}
               editService={editService}
               deleteService={deleteService}
+              filter={filter}
             />
           </div>
           <div className="column col-4">

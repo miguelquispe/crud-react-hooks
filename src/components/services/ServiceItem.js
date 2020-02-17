@@ -6,7 +6,6 @@ const ServiceItem = props => {
   const { id, name, description, category } = service;
 
   const handleClickEdit = service => {
-    // console.log(service);
     props.editService(service);
   };
 
