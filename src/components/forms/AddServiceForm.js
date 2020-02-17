@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const AddServiceForm = props => {
   const initialState = {
@@ -76,6 +77,11 @@ const AddServiceForm = props => {
       </div>
     </div>
   );
+};
+
+AddServiceForm.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  addService: PropTypes.func.isRequired
 };
 
 export default AddServiceForm;

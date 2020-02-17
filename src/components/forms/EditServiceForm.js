@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const EditServiceForm = props => {
   const [service, setService] = useState(props.currentService);
@@ -78,6 +79,17 @@ const EditServiceForm = props => {
       </div>
     </div>
   );
+};
+
+EditServiceForm.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  updateService: PropTypes.func.isRequired,
+  currentService: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default EditServiceForm;
